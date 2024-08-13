@@ -1,0 +1,60 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.10.35122.118
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AE482A0C-D09C-489D-88D5-D6493CB593A4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{63786F71-E9EE-4300-B7C8-D15F3417007F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{9A0CE77D-3FD9-4075-9B77-DD176A039C2C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{B4E4827F-B20E-4F57-9239-62168E1EBE8C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeRateChange.API", "src\Api\ExchangeRateChange.API\ExchangeRateChange.API.csproj", "{BC44DF14-7D91-4FEB-BDB6-176F9B1C72EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeRateChange.Common", "src\Common\ExchangeRateChange.Common\ExchangeRateChange.Common.csproj", "{D2E92C4B-941E-4C76-9AF2-3429DE584A40}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeRateChange.Entity", "src\core\ExchangeRateChange.Entity\ExchangeRateChange.Entity.csproj", "{C0A7C101-DC75-4022-BCBA-7EDAD2D8CE24}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExchangeRateChange.Infrastructure", "src\core\ExchangeRateChange.Infrastructure\ExchangeRateChange.Infrastructure.csproj", "{D49F3B94-974B-4E72-A5CE-D770EF39BF0A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC44DF14-7D91-4FEB-BDB6-176F9B1C72EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC44DF14-7D91-4FEB-BDB6-176F9B1C72EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC44DF14-7D91-4FEB-BDB6-176F9B1C72EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC44DF14-7D91-4FEB-BDB6-176F9B1C72EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D2E92C4B-941E-4C76-9AF2-3429DE584A40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D2E92C4B-941E-4C76-9AF2-3429DE584A40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D2E92C4B-941E-4C76-9AF2-3429DE584A40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D2E92C4B-941E-4C76-9AF2-3429DE584A40}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0A7C101-DC75-4022-BCBA-7EDAD2D8CE24}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0A7C101-DC75-4022-BCBA-7EDAD2D8CE24}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0A7C101-DC75-4022-BCBA-7EDAD2D8CE24}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0A7C101-DC75-4022-BCBA-7EDAD2D8CE24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D49F3B94-974B-4E72-A5CE-D770EF39BF0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D49F3B94-974B-4E72-A5CE-D770EF39BF0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D49F3B94-974B-4E72-A5CE-D770EF39BF0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D49F3B94-974B-4E72-A5CE-D770EF39BF0A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{63786F71-E9EE-4300-B7C8-D15F3417007F} = {AE482A0C-D09C-489D-88D5-D6493CB593A4}
+		{9A0CE77D-3FD9-4075-9B77-DD176A039C2C} = {AE482A0C-D09C-489D-88D5-D6493CB593A4}
+		{B4E4827F-B20E-4F57-9239-62168E1EBE8C} = {AE482A0C-D09C-489D-88D5-D6493CB593A4}
+		{BC44DF14-7D91-4FEB-BDB6-176F9B1C72EB} = {63786F71-E9EE-4300-B7C8-D15F3417007F}
+		{D2E92C4B-941E-4C76-9AF2-3429DE584A40} = {9A0CE77D-3FD9-4075-9B77-DD176A039C2C}
+		{C0A7C101-DC75-4022-BCBA-7EDAD2D8CE24} = {B4E4827F-B20E-4F57-9239-62168E1EBE8C}
+		{D49F3B94-974B-4E72-A5CE-D770EF39BF0A} = {B4E4827F-B20E-4F57-9239-62168E1EBE8C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E413EEBA-AA2C-411A-8DD7-F0EEDAE6A9A7}
+	EndGlobalSection
+EndGlobal

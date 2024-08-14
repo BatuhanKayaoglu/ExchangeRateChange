@@ -9,6 +9,7 @@ using ExchangeRateChange.Common.ResponseViewModel;
 using ExchangeRateChange.Common.ViewModels;
 using ExchangeRateChange.Infrastructure.IRepositories;
 using System.ComponentModel.DataAnnotations;
+using ExchangeRateChange.Common.ViewModels.User;
 
 
 namespace ExchangeRateChange.API.Controllers

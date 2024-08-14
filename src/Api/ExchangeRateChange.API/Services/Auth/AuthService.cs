@@ -18,6 +18,7 @@ using System.Linq;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using ExchangeRateChange.Common.ViewModels.User;
 
 namespace ExchangeRateChange.API.Services.Auth
 {

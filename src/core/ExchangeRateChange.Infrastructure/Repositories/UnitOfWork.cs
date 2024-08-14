@@ -17,18 +17,13 @@ namespace ExchangeRateChange.Infrastructure.Repositories
         public UnitOfWork(ExchangeRateChangeContext context)
         {
             _context = context ?? throw new ArgumentNullException(nameof(DbContext));
-            //Companies = new CompanyRepository(_context);
-            //Projects = new ProjectRepository(_context);
-            //Employees = new EmployeeRepository(_context);
-            //Issue = new IssueRepository(_context);
-            //Report = new ReportRepository(_context);
+            Exchange = new ExchangeRepository(_context);
+            Product = new ProductRepository(_context);
+ 
         }
 
-        //public ICompanyRepository Companies { get; private set; }
-        //public IProjectRepository Projects { get; private set; }
-        //public IEmployeeRepository Employees { get; private set; }
-        //public IIssueRepository Issue { get; private set; }
-        //public IReportRepository Report { get; private set; }
+        public IExchangeRepository Exchange { get; private set; }
+        public IProductRepository Product { get; private set; }
 
 
         public int SaveChanges() => _context.SaveChanges();

@@ -2,6 +2,7 @@
 using ExchangeRateChange.Common.ResponseViewModel;
 using ExchangeRateChange.Common.ViewModels;
 using ExchangeRateChange.Entity.Models.Identity;
+using ExchangeRateChange.Common.ViewModels.User;
 
 namespace ExchangeRateChange.API.Services.Auth
 {

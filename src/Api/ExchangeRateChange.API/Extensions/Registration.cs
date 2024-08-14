@@ -1,12 +1,7 @@
-﻿using ExchangeRateChange.Infrastructure.Context;
-using ExchangeRateChange.Infrastructure.IRepositories;
-using ExchangeRateChange.Infrastructure.Repositories;
-using FluentValidation;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using ExchangeRateChange.API.Extensions.JwtConf;
-using System.Reflection;
 using System.Text;
 using ExchangeRateChange.API.Services.Auth;
 using ExchangeRateChange.API.Services.Token;
@@ -20,13 +15,9 @@ namespace ExchangeRateChange.API.Extensions
         public static IServiceCollection AddAPIRegistration(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddTransient<IAuthService, AuthService>();
-            //services.AddTransient<ICompanyService, CompanyService>();
-            //services.AddTransient<ITokenService, TokenService>();
-            //services.AddTransient<IEmailSenderService, EmailSenderService>();
-            //services.AddTransient<IEmployeeService, EmployeeService>();
-            //services.AddTransient<IIssueService, IssueService>();
-            //services.AddTransient<IProjectService, ProjectService>();
-            //services.AddTransient<IReportService, ReportService>();
+            services.AddTransient<IExchangeService, ExchangeService>();
+            services.AddTransient<IProductService, ProductService>();
+  
 
             // **** JWT CONFIGURATION START ****
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(opt =>

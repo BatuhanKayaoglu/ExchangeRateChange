@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExchangeRateChange.Common.ViewModels
+namespace ExchangeRateChange.Common.ViewModels.User
 {
     public class ChangePasswordViewModel
     {

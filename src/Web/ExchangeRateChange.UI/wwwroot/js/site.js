@@ -17,10 +17,10 @@
             success: function (response) {
                 console.log(response);
                 var newRow = `<tr>
-                                    <td>-</td>
+                                    <td>${response.id}</td>
                                     <td>${response.name}</td>
                                     <td>${response.serialNumber}</td>
-                                    <td>${response.count}</td>
+                                    <td>-</td>
                                     <td>${response.price}</td>
                                     <td>-</td>
                                     <td>${response.exchangeType}</td>

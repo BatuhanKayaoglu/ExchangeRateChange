@@ -27,17 +27,15 @@ namespace ExchangeRateChange.API.Controllers
         public async Task<IActionResult> GetExchangeProducts()
         {
             List<Product> products = await unitOfWork.Product.GetAll();
-            List<GetProductListVM> data = mapper.Map<List<GetProductListVM>>(products);   
+            List<GetProductListVM> data = mapper.Map<List<GetProductListVM>>(products);
             return Ok(data);
-        }   
+        }
 
         [HttpPost]
         [Route("add-exchange-product")]
         public async Task<IActionResult> AddExchangeProduct(AddExchangeProductVM addExchangeProduct)
         {
-            Product mappedProduct = mapper.Map<Product>(addExchangeProduct);
-            await unitOfWork.Product.AddAsync(mappedProduct);
-
+            Product prod = await unitOfWork.Product.AddAsyncToProduct(addExchangeProduct);
 
             // RabbitMQ push exchange event 
             QueueFactory.SendMessageToExchange(exchangeName: QueueConstants.ExchangeRateExchangeName,
@@ -45,12 +43,12 @@ namespace ExchangeRateChange.API.Controllers
                 queueName: QueueConstants.CreateExchangeRateQueueName,
              obj: new CreateExchangeEvent()
              {
-                 Id = Guid.NewGuid(),
-                 Price = 10,
-                 ExchangeType =addExchangeProduct.ExchangeType.ToString(),
+                 Id = prod.Id,
+                 Price = prod.Price,
+                 ExchangeType = addExchangeProduct.ExchangeType,
              });
 
-            return Ok();
+            return Ok(prod);
         }
 
     }

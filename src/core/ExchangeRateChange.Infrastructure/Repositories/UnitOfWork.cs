@@ -7,18 +7,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace ExchangeRateChange.Infrastructure.Repositories
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ExchangeRateChangeContext _context;
+        private readonly IMapper mapper;    
 
-        public UnitOfWork(ExchangeRateChangeContext context)
+        public UnitOfWork(ExchangeRateChangeContext context,IMapper mapper)
         {
             _context = context ?? throw new ArgumentNullException(nameof(DbContext));
             Exchange = new ExchangeRepository(_context);
-            Product = new ProductRepository(_context);
+            Product = new ProductRepository(_context,mapper);
  
         }
 

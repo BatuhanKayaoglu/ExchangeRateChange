@@ -11,6 +11,6 @@ namespace ExchangeRateChange.Entity.Models
         public string Name { get; set; }
         public string SerialNumber { get; set; }
         public decimal Price { get; set; }
-        public string ExchangeName { get; set; }
+        public string ExchangeType { get; set; }
     }
 }

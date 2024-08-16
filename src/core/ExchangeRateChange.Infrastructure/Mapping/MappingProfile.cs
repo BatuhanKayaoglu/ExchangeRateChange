@@ -16,6 +16,9 @@ namespace ExchangeRateChange.Infrastructure.Mapping
     {
         public MappingProfile()
         {
+            CreateMap<Product, AddExchangeProductVM>().ReverseMap();    
+            CreateMap<Product, GetProductListVM>().ReverseMap();    
+            
         }
     }
 }

@@ -13,8 +13,12 @@ namespace ExchangeRateChange.Common.RabbitMQ
         public const string RabbitMQHostUri = "localhost";
         public const string DefaultExchangeType = "direct";
 
+        // for push exchange event  
         public const string ExchangeRateExchangeName = "ExchangeRateExchange";
         public const string CreateExchangeRateQueueName = "CreateExchangeRateQueue";
+
+        // for consume exchange event   
+        public const string InstantCurrencyRateQueueName = "instant_currency_rate_queue";     
 
     }
 }

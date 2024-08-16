@@ -1,9 +1,12 @@
-﻿using Azure.Core;
+﻿using AutoMapper;
+using Azure.Core;
 using EksiSozluk.Common.Infrastructure;
 using ExchangeRateChange.API.Services.Auth;
 using ExchangeRateChange.API.Services.Token;
 using ExchangeRateChange.Common.Events;
 using ExchangeRateChange.Common.RabbitMQ;
+using ExchangeRateChange.Common.ViewModels;
+using ExchangeRateChange.Entity.Models;
 using ExchangeRateChange.Infrastructure.IRepositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,30 +15,43 @@ namespace ExchangeRateChange.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ExchangeController(IExchangeService exchangeService, IUnitOfWork uow) : ControllerBase
+    public class ExchangeController(IExchangeService exchangeService, IUnitOfWork uow, IMapper mapper) : ControllerBase
     {
         private readonly IExchangeService exchangeService = exchangeService;
         private readonly IUnitOfWork unitOfWork = uow;
+        private readonly IMapper mapper = mapper;
 
+
+        [HttpGet]
+        [Route("get-exchange-products")]
+        public async Task<IActionResult> GetExchangeProducts()
+        {
+            List<Product> products = await unitOfWork.Product.GetAll();
+            List<GetProductListVM> data = mapper.Map<List<GetProductListVM>>(products);   
+            return Ok(data);
+        }   
 
         [HttpPost]
-        [Route("add-exchange-rate")]    
-        public async Task<IActionResult> AddExchangeRate()
+        [Route("add-exchange-product")]
+        public async Task<IActionResult> AddExchangeProduct(AddExchangeProductVM addExchangeProduct)
         {
+            Product mappedProduct = mapper.Map<Product>(addExchangeProduct);
+            await unitOfWork.Product.AddAsync(mappedProduct);
+
+
+            // RabbitMQ push exchange event 
             QueueFactory.SendMessageToExchange(exchangeName: QueueConstants.ExchangeRateExchangeName,
-               exchangeType: QueueConstants.DefaultExchangeType,
-               queueName: QueueConstants.CreateExchangeRateQueueName,
-            obj: new CreateExchangeEvent()
-            {
-                Id = Guid.NewGuid(),
-                Price = 10,
-                Name = "USD",
-                ExchageType = "USD",
-                ExchangeName = "USD"    
-               });
+                exchangeType: QueueConstants.DefaultExchangeType,
+                queueName: QueueConstants.CreateExchangeRateQueueName,
+             obj: new CreateExchangeEvent()
+             {
+                 Id = Guid.NewGuid(),
+                 Price = 10,
+                 ExchangeType =addExchangeProduct.ExchangeType.ToString(),
+             });
 
             return Ok();
-        }       
+        }
 
     }
 }

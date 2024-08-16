@@ -53,6 +53,8 @@ namespace EksiSozluk.Common.Infrastructure
 
             consumer.Model.QueueBind(queueName, exchangeName, queueName);
             return consumer;
+
+
         }
 
         public static EventingBasicConsumer Receive<T>(this EventingBasicConsumer consumer, Action<T> act)

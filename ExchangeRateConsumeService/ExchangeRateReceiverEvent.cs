@@ -8,16 +8,8 @@ namespace ExchangeRateConsumeService
 {
     public class ExchangeRateReceiverEvent
     {
-        public class CurrencyPrice
-        {
-            public decimal BuyPrice { get; set; }
-            public decimal SellPrice { get; set; }
-        }
-
-        public class CurrencyData
-        {
-            public Dictionary<string, CurrencyPrice> CurrencyDict { get; set; }
-        }
-
+        public string Currency { get; set; }
+        public string BuyPrice { get; set; }
+        public string SellPrice { get; set; }
     }
 }

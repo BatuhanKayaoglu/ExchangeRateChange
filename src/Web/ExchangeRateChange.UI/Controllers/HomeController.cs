@@ -24,11 +24,11 @@ namespace ExchangeRateChange.UI.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var client = _clientFactory.CreateClient(); 
-            client.BaseAddress = new Uri("https://localhost:44308/api/Exchange/"); 
+            var client = _clientFactory.CreateClient();
+            client.BaseAddress = new Uri("https://localhost:44308/api/Exchange/");
             HttpResponseMessage response = await client.GetAsync("get-exchange-products");
 
-            var responseData = await response.Content.ReadAsStringAsync(); 
+            var responseData = await response.Content.ReadAsStringAsync();
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
@@ -40,27 +40,25 @@ namespace ExchangeRateChange.UI.Controllers
 
         public async Task<IActionResult> sendProductData(AddExchangeProductVM addExchangeProduct)
         {
-            using (var client = new HttpClient())
+            var client = _clientFactory.CreateClient();
+            client.BaseAddress = new Uri("https://localhost:44308/api/Exchange/");
+            StringContent jsonContent = new StringContent(JsonSerializer.Serialize(addExchangeProduct), Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync("add-exchange-product", jsonContent);
+
+            if (response.IsSuccessStatusCode)
             {
-                string url = "https://localhost:44308/api/Exchange/add-exchange-product";
-                StringContent jsonContent = new StringContent(JsonSerializer.Serialize(addExchangeProduct), Encoding.UTF8, "application/json");
-                HttpResponseMessage response = await client.PostAsync(url, jsonContent);
-
-                if (response.IsSuccessStatusCode)
+                var responseData = await response.Content.ReadAsStringAsync();
+                var options = new JsonSerializerOptions
                 {
-                    var responseData = await response.Content.ReadAsStringAsync();
-                    var options = new JsonSerializerOptions
-                    {
-                        PropertyNameCaseInsensitive = true
-                    };
-                    Product? product = JsonSerializer.Deserialize<Product>(responseData, options);
+                    PropertyNameCaseInsensitive = true
+                };
+                Product? product = JsonSerializer.Deserialize<Product>(responseData, options);
 
-                    return Ok(product);
-                }
-                else
-                {
-                    return StatusCode((int)response.StatusCode, response.ReasonPhrase);
-                }
+                return Ok(product);
+            }
+            else
+            {
+                return StatusCode((int)response.StatusCode, response.ReasonPhrase);
             }
         }
     }

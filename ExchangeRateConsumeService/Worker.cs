@@ -26,8 +26,10 @@ namespace ExchangeRateConsumeService
                     {
                         PropertyNamingPolicy = JsonNamingPolicy.CamelCase
                     };
+
+                    var data = JsonSerializer.Serialize(fav, options);
                 })
                 .StartingConsuming(QueueConstants.InstantCurrencyRateQueueName);
-        }       
+        }
     }
 }

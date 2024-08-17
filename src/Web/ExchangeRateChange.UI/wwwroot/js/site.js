@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     $('.exchangeDataSendBtn').off('click').on('click', function (e) {
-        e.preventDefault(); // Butona tıklandığında formun normal submit işlemini durdur
+        e.preventDefault(); 
 
         var formData = {
             Name: $('#productName').val(),

@@ -67,9 +67,8 @@ namespace ExchangeRateChange.UI.Controllers
         }
 
 
-        [Route("signalr")]
-
-        public async Task<IActionResult> Signalr(string data)
+        //[HttpPost]  
+        public async Task<IActionResult> Signalr()
         {
             await _hubContext.Clients.All.SendAsync("ReceiveMessage", "Test", "message");
             return Ok();

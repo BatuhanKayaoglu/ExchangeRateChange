@@ -9,7 +9,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using ExchangeRateChange.Infrastructure.Extensions;
 using Serilog;
-using Serilog.Core;
+using Serilog.Core; 
 using Serilog.Events;
 using Serilog.Sinks.MSSqlServer;
 using System.Collections.ObjectModel;

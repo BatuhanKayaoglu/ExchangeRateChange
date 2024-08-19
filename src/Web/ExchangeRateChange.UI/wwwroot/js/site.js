@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     $('.exchangeDataSendBtn').off('click').on('click', function (e) {
-        e.preventDefault(); 
+        e.preventDefault();
 
         var formData = {
             Name: $('#productName').val(),
@@ -35,4 +35,28 @@
             }
         });
     });
+
+
+    const connection = new signalR.HubConnectionBuilder()
+        .withUrl("/ExchangeRateHub")
+        .build();
+
+    connection.on("ReceiveMessage", function (data) {
+        // Veriyi UI'a ekle
+        console.log(data);
+        var table = document.getElementById("exchangeRateTable");
+        var row = table.insertRow();
+        var cell1 = row.insertCell(0);
+        var cell2 = row.insertCell(1);
+        cell1.innerHTML = data.currency;
+        cell2.innerHTML = data.rate;
+    });
+
+    connection.start().catch(function (err) {
+        return console.error(err.toString());
+    });
+
+
 });
+
+

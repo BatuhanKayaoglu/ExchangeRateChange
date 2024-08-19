@@ -1,11 +1,18 @@
+using ExchangeRateChange.Common.Hubs;
+using ExchangeRateConsumeService;
+
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddSignalR();
 
 builder.Services.AddHttpClient();
 
 var app = builder.Build();
+
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -21,6 +28,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+app.MapHub<ExchangeRateHub>("/ExchangeRateHub");
 
 app.MapControllerRoute(
     name: "default",

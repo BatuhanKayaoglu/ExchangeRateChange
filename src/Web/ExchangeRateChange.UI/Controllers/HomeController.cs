@@ -1,7 +1,9 @@
+using ExchangeRateChange.Common.Hubs;
 using ExchangeRateChange.Common.ViewModels;
 using ExchangeRateChange.Entity.Models;
 using ExchangeRateChange.UI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
@@ -14,11 +16,13 @@ namespace ExchangeRateChange.UI.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpClientFactory _clientFactory;
+        private readonly IHubContext<ExchangeRateHub> _hubContext;
 
-        public HomeController(ILogger<HomeController> logger, IHttpClientFactory clientFactory)
+        public HomeController(ILogger<HomeController> logger, IHttpClientFactory clientFactory, IHubContext<ExchangeRateHub> hubContext)
         {
             _logger = logger;
             _clientFactory = clientFactory;
+            _hubContext = hubContext;
         }
 
 
@@ -60,6 +64,15 @@ namespace ExchangeRateChange.UI.Controllers
             {
                 return StatusCode((int)response.StatusCode, response.ReasonPhrase);
             }
+        }
+
+
+        [Route("signalr")]
+
+        public async Task<IActionResult> Signalr(string data)
+        {
+            await _hubContext.Clients.All.SendAsync("ReceiveMessage", "Test", "message");
+            return Ok();
         }
     }
 }

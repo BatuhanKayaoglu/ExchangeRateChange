@@ -42,7 +42,7 @@ namespace ExchangeRateConsumeService
 
                     var client = new HttpClient();
                     client.BaseAddress = new Uri("https://localhost:44373/");
-                    StringContent content = new StringContent(data, Encoding.UTF8, "text/plain");
+                    StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
                     HttpResponseMessage response = await client.PostAsync("home/signalr", content);
                     if (response.IsSuccessStatusCode)

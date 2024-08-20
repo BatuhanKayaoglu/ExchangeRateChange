@@ -2,6 +2,7 @@ using ExchangeRateChange.Common.Hubs;
 using ExchangeRateChange.Common.ViewModels;
 using ExchangeRateChange.Entity.Models;
 using ExchangeRateChange.UI.Models;
+using ExchangeRateConsumeService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using System.Diagnostics;
@@ -68,9 +69,9 @@ namespace ExchangeRateChange.UI.Controllers
 
 
         //[HttpPost]  
-        public async Task<IActionResult> Signalr()
+        public async Task<IActionResult> Signalr([FromBody] ExchangeRateReceiverEvent data)
         {
-            await _hubContext.Clients.All.SendAsync("ReceiveMessage", "Test", "message");
+            await _hubContext.Clients.All.SendAsync("ReceiveMessage", data, data);
             return Ok();
         }
     }

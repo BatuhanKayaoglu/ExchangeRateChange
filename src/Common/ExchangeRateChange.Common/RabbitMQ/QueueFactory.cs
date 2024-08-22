@@ -49,12 +49,10 @@ namespace EksiSozluk.Common.Infrastructure
 
         public static EventingBasicConsumer EnsureQueue(this EventingBasicConsumer consumer, string queueName, string exchangeName)
         {
-            consumer.Model.QueueDeclare(queue: queueName, durable: true, exclusive: false, autoDelete: false);
+            consumer.Model.QueueDeclare(queue: queueName, durable: false, exclusive: false, autoDelete: false);
 
             consumer.Model.QueueBind(queueName, exchangeName, queueName);
             return consumer;
-
-
         }
 
         public static EventingBasicConsumer Receive<T>(this EventingBasicConsumer consumer, Action<T> act)

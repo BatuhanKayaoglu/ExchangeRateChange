@@ -41,15 +41,28 @@
         .withUrl("/ExchangeRateHub")
         .build();
 
+
     connection.on("ReceiveMessage", function (data) {
-        // Veriyi UI'a ekle
         console.log(data);
-        var table = document.getElementById("exchangeRateTable");
-        var row = table.insertRow();
-        var cell1 = row.insertCell(0);
-        var cell2 = row.insertCell(1);
-        cell1.innerHTML = data.currency;
-        cell2.innerHTML = data.rate;
+        // JSON verisini işleme
+        const currency = data.currency;
+        const buyPrice = parseFloat(data.buyPrice.replace(',', '.')); // ',' yerine '.' kullanarak dönüştürme
+        const sellPrice = parseFloat(data.sellPrice.replace(',', '.')); // ',' yerine '.' kullanarak dönüştürme
+        const id = data.id.toLowerCase();
+        const price = parseFloat(data.price);
+
+        // ID ile eşleşen satırı bulma
+        const rows = document.querySelectorAll("#exchangeRateTable tbody tr");
+        rows.forEach(row => {
+            const cellId = row.cells[0].textContent.trim(); // ID hücresini al
+            if (cellId === id) {
+                console.log("EŞLEŞTİ:", cellId)
+                // Eşleşen satırı bulduğunda bilgileri güncelle
+                row.cells[5].textContent = (price * buyPrice).toFixed(2); // New Price hesaplama ve yazdırma
+                row.cells[6].textContent = currency; // Exchange Type
+                row.cells[7].textContent = buyPrice.toFixed(4); // Exchange Rate
+            }
+        });
     });
 
     connection.start().catch(function (err) {

@@ -11,5 +11,7 @@ namespace ExchangeRateConsumeService
         public string Currency { get; set; }
         public string BuyPrice { get; set; }
         public string SellPrice { get; set; }
+        public string Id { get; set; }
+        public int Price { get; set; }
     }
 }

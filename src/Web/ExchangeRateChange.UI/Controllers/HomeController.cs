@@ -26,7 +26,6 @@ namespace ExchangeRateChange.UI.Controllers
             _hubContext = hubContext;
         }
 
-
         public async Task<IActionResult> Index()
         {
             var client = _clientFactory.CreateClient();
@@ -67,8 +66,6 @@ namespace ExchangeRateChange.UI.Controllers
             }
         }
 
-
-        //[HttpPost]  
         public async Task<IActionResult> Signalr([FromBody] ExchangeRateReceiverEvent data)
         {
             await _hubContext.Clients.All.SendAsync("ReceiveMessage", data, data);

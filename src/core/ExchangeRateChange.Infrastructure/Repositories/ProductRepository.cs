@@ -26,6 +26,7 @@ namespace ExchangeRateChange.Infrastructure.Repositories
         {
             Product mappedProduct = mapper.Map<Product>(entity);
             await dbContext.AddAsync(mappedProduct); 
+            await dbContext.SaveChangesAsync(); 
             return mappedProduct;   
         }
     }

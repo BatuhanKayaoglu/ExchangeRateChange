@@ -15,7 +15,6 @@
             type: 'POST',
             data: formData,
             success: function (response) {
-                console.log(response);
                 var newRow = `<tr>
                                     <td>${response.id}</td>
                                     <td>${response.name}</td>
@@ -26,41 +25,35 @@
                                     <td>${response.exchangeType}</td>
                                     <td>-</td>
                                 </tr>`;
-
                 $('table tbody').append(newRow);
             },
             error: function (xhr, status, error) {
-                console.error('Hata: ' + error);
                 alert('Ürün gönderilemedi, lütfen tekrar deneyin.');
             }
         });
     });
 
 
+    // SignalR
     const connection = new signalR.HubConnectionBuilder()
         .withUrl("/ExchangeRateHub")
         .build();
-
-
     connection.on("ReceiveMessage", function (data) {
         console.log(data);
-        // JSON verisini işleme
         const currency = data.currency;
-        const buyPrice = parseFloat(data.buyPrice.replace(',', '.')); // ',' yerine '.' kullanarak dönüştürme
-        const sellPrice = parseFloat(data.sellPrice.replace(',', '.')); // ',' yerine '.' kullanarak dönüştürme
+        const buyPrice = parseFloat(data.buyPrice.replace(',', '.'));
+        const sellPrice = parseFloat(data.sellPrice.replace(',', '.'));
         const id = data.id.toLowerCase();
         const price = parseFloat(data.price);
 
-        // ID ile eşleşen satırı bulma
         const rows = document.querySelectorAll("#exchangeRateTable tbody tr");
         rows.forEach(row => {
-            const cellId = row.cells[0].textContent.trim(); // ID hücresini al
+            const cellId = row.cells[0].textContent.trim();
             if (cellId === id) {
-                console.log("EŞLEŞTİ:", cellId)
-                // Eşleşen satırı bulduğunda bilgileri güncelle
-                row.cells[5].textContent = (price * buyPrice).toFixed(2); // New Price hesaplama ve yazdırma
-                row.cells[6].textContent = currency; // Exchange Type
-                row.cells[7].textContent = buyPrice.toFixed(4); // Exchange Rate
+                console.log("MATCHED:", cellId)
+                row.cells[5].textContent = (price * sellPrice).toFixed(2);
+                row.cells[6].textContent = currency;
+                row.cells[7].textContent = buyPrice.toFixed(4);
             }
         });
     });
@@ -68,7 +61,6 @@
     connection.start().catch(function (err) {
         return console.error(err.toString());
     });
-
 
 });
 

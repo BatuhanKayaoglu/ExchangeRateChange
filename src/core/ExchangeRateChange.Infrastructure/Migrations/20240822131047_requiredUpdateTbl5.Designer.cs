@@ -4,6 +4,7 @@ using ExchangeRateChange.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExchangeRateChange.Infrastructure.Migrations
 {
     [DbContext(typeof(ExchangeRateChangeContext))]
-    partial class ExchangeRateChangeContextModelSnapshot : ModelSnapshot
+    [Migration("20240822131047_requiredUpdateTbl5")]
+    partial class requiredUpdateTbl5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -159,8 +161,8 @@ namespace ExchangeRateChange.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime2");
 
-                    b.Property<float?>("ExchangeSellRate")
-                        .HasColumnType("real");
+                    b.Property<decimal>("ExchangeSellRate")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ExchangeType")
                         .IsRequired()
@@ -171,8 +173,8 @@ namespace ExchangeRateChange.Infrastructure.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<float?>("NewPrice")
-                        .HasColumnType("real");
+                    b.Property<decimal>("NewPrice")
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");

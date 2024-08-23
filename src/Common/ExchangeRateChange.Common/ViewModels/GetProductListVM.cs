@@ -14,5 +14,7 @@ namespace ExchangeRateChange.Common.ViewModels
         public decimal Price { get; set; }
         public string ExchangeType { get; set; }
         public DateTime createDate { get; set; }
+        public decimal? NewPrice { get; set; }
+        public decimal? ExchangeSellRate { get; set; }
     }
 }

@@ -12,8 +12,8 @@ namespace ExchangeRateChange.Entity.Models
         public string SerialNumber { get; set; }
         public decimal Price { get; set; }
         public string ExchangeType { get; set; }
-        public float? NewPrice { get; set; }
-        public float? ExchangeSellRate { get; set; }
+        public decimal? NewPrice { get; set; }
+        public decimal? ExchangeSellRate { get; set; }
 
     }
 }

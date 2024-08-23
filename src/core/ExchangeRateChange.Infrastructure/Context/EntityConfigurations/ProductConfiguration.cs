@@ -29,11 +29,11 @@ namespace ExchangeRateChange.Infrastructure.Context.EntityConfigurations
                    .HasMaxLength(100)
                    .IsRequired();
 
-            //builder.Property(e => e.NewPrice)
-            //       .HasColumnType("decimal(18, 4)");
+            builder.Property(e => e.NewPrice)
+                   .HasColumnType("decimal(10, 2)");
 
-            //builder.Property(e => e.ExchangeSellRate)
-            //       .HasColumnType("decimal(18, 4)");
+            builder.Property(e => e.ExchangeSellRate)
+                   .HasColumnType("decimal(10, 4)");
         }
     }
 

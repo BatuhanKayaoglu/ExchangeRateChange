@@ -1,5 +1,7 @@
 ﻿using Dapper;
 using Microsoft.Data.SqlClient;
+using Newtonsoft.Json.Linq;
+using System.Globalization;
 using System.Text;
 
 namespace ExchangeRateConsumeService.Services
@@ -34,12 +36,15 @@ namespace ExchangeRateConsumeService.Services
         public async Task<bool> AddExchangeToDB(ExchangeRateReceiverEvent exchange)
         {
             using var connection = new SqlConnection(connectionString);
+            decimal SellPrice = decimal.Parse(exchange.SellPrice, CultureInfo.InvariantCulture);
+            decimal newPrice = exchange.Price * SellPrice;
+
             await connection.ExecuteAsync("UPDATE [Product] SET ExchangeSellRate=@ExchangeSellRate, NewPrice=@NewPrice  WHERE Id=@Id ",
                                  new
                                  {
                                      Id = exchange.Id,
-                                     ExchangeSellRate = Convert.ToDecimal(exchange.SellPrice),
-                                     NewPrice = exchange.Price * Convert.ToDecimal(exchange.SellPrice)
+                                     ExchangeSellRate =SellPrice,
+                                     NewPrice = newPrice
                                  });
             Console.WriteLine("Exchange added to DB");
             return true;

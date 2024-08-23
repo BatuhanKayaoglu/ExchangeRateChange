@@ -56,7 +56,7 @@
         </thead>
         <tbody>
 
-            @foreach (var item in Model)
+@*             @foreach (var item in Model)
             {
                 <tr>
                     <td>@item.Id</td>
@@ -69,6 +69,20 @@
                     <td>-</td>
                 </tr>
 
+            } *@
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.SerialNumber</td>
+                    <td>-</td>
+                    <td>@item.Price</td>
+                    <td>@(item.NewPrice != null ? item.NewPrice : "-")</td>
+                    <td>@(item.ExchangeType is null ? "x" : item.ExchangeType)</td>
+                    <td>@(item.ExchangeSellRate != null ? item.ExchangeSellRate : "-")</td>
+                </tr>
             }
 
     </table>

@@ -17,6 +17,7 @@ The architecture of this project is built around two main components: the .NET A
 - **Python Microservice**:
   - **Web Scraping**: The Python microservice performs web scraping from sources like döviz.com to retrieve real-time exchange rate data. This is done using libraries such as BeautifulSoup.
   - **Data Processing and Return**: The retrieved exchange rate data is processed and sent back to the .NET application through RabbitMQ.
+  - For Python Exchange Service : "https://github.com/BatuhanKayaoglu/ExchangeRateService"
 
 ## Project Workflow
 

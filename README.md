@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project demonstrates a system that dynamically updates product prices using real-time exchange rate information. The system ensures seamless data flow between a .NET application and a Python microservice. Specifically, it handles the process where selected exchange rates and prices are sent via a message queue (RabbitMQ) to a Python microservice. The microservice then performs web scraping from a source like döviz.com to retrieve the latest exchange rate and sends this data back to the .NET application via RabbitMQ. The .NET application then calculates the updated product price based on the exchange rate and displays it to the client in real-time using SignalR.
+This project demonstrates a system that dynamically updates product prices using real-time exchange rate information. The system ensures seamless data flow between a .NET application and a Python microservice. Specifically, it handles the process where selected exchange rates and prices are sent via a message queue (RabbitMQ) to a Python microservice. The microservice then performs web scraping from a source like 'döviz.com' to retrieve the latest exchange rate and sends this data back to the .NET application via RabbitMQ. The .NET application then calculates the updated product price based on the exchange rate and displays it to the client in real-time using SignalR.
 
 ## Architecture
 

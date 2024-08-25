@@ -12,4 +12,8 @@
     <ProjectReference Include="..\..\core\ExchangeRateChange.Entity\ExchangeRateChange.Entity.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

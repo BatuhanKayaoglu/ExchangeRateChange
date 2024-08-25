@@ -1,7 +1,6 @@
 using ExchangeRateChange.Common.Hubs;
 using ExchangeRateChange.Common.ViewModels;
 using ExchangeRateChange.Entity.Models;
-using ExchangeRateChange.UI.Models;
 using ExchangeRateConsumeService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
@@ -18,12 +17,15 @@ namespace ExchangeRateChange.UI.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IHttpClientFactory _clientFactory;
         private readonly IHubContext<ExchangeRateHub> _hubContext;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public HomeController(ILogger<HomeController> logger, IHttpClientFactory clientFactory, IHubContext<ExchangeRateHub> hubContext)
+
+        public HomeController(ILogger<HomeController> logger, IHttpClientFactory clientFactory, IHubContext<ExchangeRateHub> hubContext,IHttpContextAccessor httpContextAccessor)
         {
             _logger = logger;
             _clientFactory = clientFactory;
             _hubContext = hubContext;
+            _httpContextAccessor = httpContextAccessor; 
         }
 
         public async Task<IActionResult> Index()
@@ -44,6 +46,7 @@ namespace ExchangeRateChange.UI.Controllers
 
         public async Task<IActionResult> sendProductData(AddExchangeProductVM addExchangeProduct)
         {
+
             var client = _clientFactory.CreateClient();
             client.BaseAddress = new Uri("https://localhost:44308/api/Exchange/");
             StringContent jsonContent = new StringContent(JsonSerializer.Serialize(addExchangeProduct), Encoding.UTF8, "application/json");
@@ -66,7 +69,7 @@ namespace ExchangeRateChange.UI.Controllers
             }
         }
 
-        public async Task<IActionResult> Signalr([FromBody] ExchangeRateReceiverEvent data)
+        public async Task<IActionResult> SignalToClient([FromBody] ExchangeRateReceiverEvent data)
         {
             await _hubContext.Clients.All.SendAsync("ReceiveMessage", data, data);
             return Ok();

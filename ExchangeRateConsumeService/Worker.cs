@@ -17,8 +17,6 @@ namespace ExchangeRateConsumeService
         private readonly IHttpClientFactory httpClientFactory;
         private readonly ConsumeService consumeService;
 
-
-
         public Worker(ILogger<Worker> logger, IServiceProvider serviceProvider, IHttpClientFactory httpClientFactory, ConsumeService consumeService)
         {
             _logger = logger;

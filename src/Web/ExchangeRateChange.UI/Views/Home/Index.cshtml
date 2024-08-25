@@ -26,9 +26,10 @@
         <div class="form-group col-md-6">
             <select id="exchangeRate" class="form-control" name="ExchangeType">
                 <option selected>Choose...</option>
-                <option>Dolar</option>
+                <option>Abd dolari</option>
                 <option>Euro</option>
-                <option>Altın</option>
+                <option>Gram altin</option>
+                <option>Bist 100</option>   
             </select>
         </div>
         <div class="form-group col-md-4 d-flex" style="align-items:flex-end;">
@@ -56,21 +57,6 @@
         </thead>
         <tbody>
 
-@*             @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Name</td>
-                    <td>@item.SerialNumber</td>
-                    <td>-</td>
-                    <td>@item.Price</td>
-                    <td>-</td>
-                    <td>@(item.ExchangeType is null ? "x" : item.ExchangeType)</td>
-                    <td>-</td>
-                </tr>
-
-            } *@
-
             @foreach (var item in Model)
             {
                 <tr>
@@ -79,14 +65,32 @@
                     <td>@item.SerialNumber</td>
                     <td>-</td>
                     <td>@item.Price</td>
-                    <td>@(item.NewPrice != null ? item.NewPrice : "-")</td>
-                    <td>@(item.ExchangeType is null ? "x" : item.ExchangeType)</td>
-                    <td>@(item.ExchangeSellRate != null ? item.ExchangeSellRate : "-")</td>
+                    <td>
+                        @if (item.NewPrice is null)
+                        {
+                            <div class="loader"></div>
+                            <div class="data-cell" style="display:none;">
+                                @(item.NewPrice != null ? item.NewPrice : "-")
+                            </div>
+                        }
+                        @(item.NewPrice != null ? item.NewPrice : "-")
+                    </td>
+                    <td>@(item.ExchangeType)</td>
+                    <td>
+                        @if (item.ExchangeSellRate is null)
+                        {
+                            <div class="loader"></div>
+                            <div class="data-cell" style="display:none;">
+                                @(item.ExchangeSellRate != null ? item.ExchangeSellRate : "-")
+                            </div>
+                        }
+                        @(item.ExchangeSellRate != null ? item.ExchangeSellRate : "-")
+                    </td>
                 </tr>
             }
-
+        </tbody>
     </table>
 </div>
 
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/js/site.js"></script>
+@* <script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/site.js"></script> *@

@@ -9,7 +9,6 @@ namespace ExchangeRateChange.Infrastructure.IRepositories
 {
     public interface IUnitOfWork
     {
-        IExchangeRepository Exchange { get; }
         IProductRepository Product { get; }
         int SaveChanges();
     }

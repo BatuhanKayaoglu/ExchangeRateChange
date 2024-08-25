@@ -36,9 +36,7 @@ namespace ExchangeRateChange.Infrastructure.Context
             }
 
         }
-        public DbSet<Exchange> Exchanges { get; set; }
         public DbSet<Product> Products { get; set; }
-
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());

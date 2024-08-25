@@ -19,14 +19,11 @@ namespace ExchangeRateChange.Infrastructure.Repositories
         public UnitOfWork(ExchangeRateChangeContext context,IMapper mapper)
         {
             _context = context ?? throw new ArgumentNullException(nameof(DbContext));
-            Exchange = new ExchangeRepository(_context);
             Product = new ProductRepository(_context,mapper);
  
         }
 
-        public IExchangeRepository Exchange { get; private set; }
         public IProductRepository Product { get; private set; }
-
 
         public int SaveChanges() => _context.SaveChanges();
 

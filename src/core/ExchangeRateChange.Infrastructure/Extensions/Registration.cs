@@ -35,7 +35,6 @@ namespace ExchangeRateChange.Infrastructure.Extensions
             services.AddIdentity<AppUser, AppRole>().AddDefaultTokenProviders().AddEntityFrameworkStores<ExchangeRateChangeContext>(); // Identity'yi ekledik.   
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
-            services.AddScoped<IExchangeRepository, ExchangeRepository>();
             services.AddScoped<IProductRepository, ProductRepository>();
 
             return services;

@@ -21,22 +21,22 @@ namespace ExchangeRateConsumeService.Services
 
         public async Task<bool> SendExchangeToClient(string data)
         {
-            //var client = new HttpClient();
             var client = httpClientFactory.CreateClient();
             client.BaseAddress = new Uri("https://localhost:44373/");
             StringContent content = new StringContent(data, Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await client.PostAsync("home/signalr", content);
+            HttpResponseMessage response = await client.PostAsync("home/SignalToClient", content);
             if (!response.IsSuccessStatusCode)
                 return false;
 
             return true;
         }
 
+        // USING DAPPER FOR PERFORMANCE
         public async Task<bool> AddExchangeToDB(ExchangeRateReceiverEvent exchange)
         {
             using var connection = new SqlConnection(connectionString);
-            decimal SellPrice = decimal.Parse(exchange.SellPrice, CultureInfo.InvariantCulture);
+            decimal SellPrice = decimal.Parse(exchange.SellPrice.Replace(".", ""), CultureInfo.InvariantCulture);
             decimal newPrice = exchange.Price * SellPrice;
 
             await connection.ExecuteAsync("UPDATE [Product] SET ExchangeSellRate=@ExchangeSellRate, NewPrice=@NewPrice  WHERE Id=@Id ",
@@ -46,7 +46,7 @@ namespace ExchangeRateConsumeService.Services
                                      ExchangeSellRate =SellPrice,
                                      NewPrice = newPrice
                                  });
-            Console.WriteLine("Exchange added to DB");
+            Console.WriteLine("Exchange data added to DB");
             return true;
         }
     }
